@@ -9,7 +9,7 @@ const url		= 'mongodb://localhost:27017/CBProducts' //add the port where mongoos
 
 mongoose.connect(url, db_config)
 	.then(db => {console.log('db connected')})
-	.catch(err => {cosole.log(err)});
+	.catch(err => {console.log(err)});
 
 
 
