@@ -15,7 +15,7 @@ routes.get('/feed', (req,res) => {
 	const user_token = req.headers.cookie;
 
 	if(!user_token){
-		res.redirect('/api/login');
+		res.end('Do you want be logged in this site?');
 	}
 
 	res.end('this is the feed page');

@@ -17,27 +17,30 @@ router.get('/description/:id', (req,res) => {
 })
 
 router.get('/logout', (req,res) => {
-	var secret_key = process.env.SECRET_KEY;
-	var user_token = req.headers.cookie;
+	var secret_key 	 = process.env.SECRET_KEY;
+	var access_token = req.headers.cookie;
+	var referer 	 = req.headers.referer;
 
-	if (!user_token){
-		res.redirect('/homepage');
+	if (!access_token){
+		res.redirect(referer + 'homepage');
 	}
 
 	res.clearCookie('access_token');
-	res.redirect('/homepage');
+	res.redirect(referer + 'homepage');
 })
 
-router.get('/login', (req,res) => {
-	var secret_key = process.env.SECRET_KEY;
-	var user_token = req.headers.cookie;
+router.post('/login', (req,res) => {
+	var secret_key 	 = process.env.SECRET_KEY;
+	var access_token = req.headers.cookie;
+	var referer 	 = req.headers.referer;
 
-	if (user_token){
-		res.json({'data':'you are already logged in'});
-		res.redirect('homepage');
+	var { pass, name } = req.body;
+
+	if (access_token){
+		res.redirect(referer + "homepage").status(200);
 	}else{
 		const payload = { check:true };
-		const access_token = jwt.sign(
+		const new_access_token = jwt.sign(
 			payload, 
 			secret_key, 
 			{ expiresIn: 1440}
@@ -47,28 +50,31 @@ router.get('/login', (req,res) => {
 			maxAge: 900000,
 			secure: true
 		}
-		res.cookie('access_token', access_token, config_cookie);
-		res.redirect('/homepage')
+		res.cookie('access_token', new_access_token, config_cookie);
+		res.redirect(referer + "homepage");
 	}
 })
 
-router.get('/register', (req,res) => {
-	const user_token = process.env.SECRET_KEY;
+router.post('/register', (req,res) => {
+	const secret_key   = process.env.SECRET_KEY;
+	const referer 	   = req.headers.referer;
+	const access_token = req.headers.cookie;
 
-	if(user_token){
-		redirect('/homepage');
+	var { pass, name } = req.body;
+
+	if(access_token){
+		redirect(referer + 'homepage');
 	}
 
 	const payload = { check:true };
-	const token = jwt.sign(
+	const new_access_token = jwt.sign(
 		payload, 
 		secret_key, 
 		{ expiresIn: 1440}
 	);
 
-	var access_token = token;
-	res.cookie('access_token', access_token, {maxAge: 10800});
-	res.redirect('/homepage');
+	res.cookie('access_token', new_access_token, {maxAge: 10800});
+	res.redirect(referer + 'homepage');
 })
 
 module.exports = router;
