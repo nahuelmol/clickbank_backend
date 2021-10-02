@@ -16,21 +16,17 @@ router.get('/description/:id', (req,res) => {
 	res.json(data[id]);
 })
 
-const authorization = (req, res, next) => {
-  const token = req.cookies.access_token;
-  if (!token) {
-    return res.sendStatus(403);
-  }
-  try {
-    const data = jwt.verify(token, process.env.SECRET_KEY);
-    req.userId = data.id;
-    req.userRole = data.role;
-    return next();
-  } catch {
-    return res.sendStatus(403);
-  }
-};
+router.get('/logout', (req,res) => {
+	var secret_key = process.env.SECRET_KEY;
+	var user_token = req.headers.cookie;
 
+	if (!user_token){
+		res.redirect('/homepage');
+	}
+
+	res.clearCookie('access_token');
+	res.redirect('/homepage');
+})
 
 router.get('/login', (req,res) => {
 	var secret_key = process.env.SECRET_KEY;

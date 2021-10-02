@@ -5,7 +5,7 @@ routes.get('/homepage', (req,res) => {
 	const user_token = req.headers.cookie;
 
 	if(!user_token){
-		res.redirect('/api/login');
+		res.end('You need to be logged in');
 	}
 
 	res.end('This is the homepage');
