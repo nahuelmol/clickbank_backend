@@ -1,7 +1,5 @@
-const { Router } 	= require('express');
-const routes 		= Router();
 
-routes.get('/homepage', (req,res) => {
+const HomePageView = (req,res) => {
 	const user_token = req.headers.cookie;
 
 	if(!user_token){
@@ -9,9 +7,9 @@ routes.get('/homepage', (req,res) => {
 	}
 
 	res.end('This is the homepage');
-})
+}
 
-routes.get('/feed', (req,res) => {
+const FeedView = (req,res) => {
 	const user_token = req.headers.cookie;
 
 	if(!user_token){
@@ -19,7 +17,19 @@ routes.get('/feed', (req,res) => {
 	}
 
 	res.end('this is the feed page');
-})
+}
 
+const UserView = (req,res) => {
+	const user_token = req.headers.cookie;
 
-module.exports = routes;
+	if(!user_token){
+		res.end('Do you want be logged in this site?');
+	}
+
+	res.end('this is the userview page');
+}
+
+module.exports = {
+	HomePageView: HomePageView,
+	FeedView:FeedView
+}

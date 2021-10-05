@@ -4,39 +4,33 @@ const Schema	= mongoose.Schema;
 var BookSchema	= new Schema({
 	title:String,
 	author:String,
+	email:String,
 	direct_link:String,
 	description:String
 })
 
-var data = [
-  {
-  	id:1,
-    name: "John",
-    author: "wick",
-    direct_link: "New York",
-    description:"something"
-  },
-  {
-  	id:2,
-    name: "culo",
-    author: "opened",
-    direct_link: "csli",
-    description:"uff"
-  },
-  {
-  	id:3,
-    name: "apeal",
-    author: "to you heart",
-    direct_link: "good vibes",
-    description:"not guts"
-  }
-  
-];
+var CommentSchema = new Schema({
+	author:String,
+	date:String,
+	likes:Number,
+	shares:Number
+})
 
-const BookModel = mongoose.model('Book', BookSchema);
+var UserSchema = new Schema({
+	name:String,
+	last_name:String,
+	password:String,
+	email:String,
+	age:Number
+})
+
+const BookModel 	= mongoose.model('Book', 	BookSchema);
+const CommentModel 	= mongoose.model('Comment', CommentSchema);
+const UserModel 	= mongoose.model('User',	UserSchema);
 
 module.exports = {
 	BookModel,
-	data
+	CommentSchema,
+	UserModel
 };
 

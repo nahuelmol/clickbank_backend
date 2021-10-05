@@ -1,11 +1,14 @@
 const mongoose 	= require('mongoose');
 const configs	= require('../config/configs');
-const BookModel = require('./models.js')
 
-const data	= require('../db/models').data;
+const { 
+	BookModel, 
+	CommentModel, 
+	UserModel
+ }	= require('../db/models');
 const db_config = configs.db_config;
 
-const url		= 'mongodb://localhost:27017/CBProducts' //add the port where mongoose is running
+const url		= 'mongodb://localhost:27017/ClickBankDB' 
 
 mongoose.connect(url, db_config)
 	.then(db => {console.log('db connected')})

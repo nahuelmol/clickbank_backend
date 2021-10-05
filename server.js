@@ -3,10 +3,12 @@ const bodyParser 	  = require('body-parser');
 const cors 			    = require('cors');
 const cookieParser  = require('cookie-parser');
 const morgan        = require('morgan');
-require('dotenv').config();
 
-const apiroutes   = require('./routes/api');
-const routes      = require('./routes/views');
+require('dotenv').config();
+require('./db/conn');
+
+const apiroutes   = require('./routes/api/urls');
+const routes      = require('./routes/urls');
 
 const PORT      = process.env.PORT;
 const localhost = process.env.LOCAL_HOST;
@@ -23,12 +25,9 @@ app.use(morgan('dev'));
 app.use('/api',   apiroutes);
 app.use(routes);
 
-var allowedOrigins = ['http://localhost:8080',
-                      'http://yourapp.com'];
+var allowedOrigins = ['http://localhost:8080'];
 app.use(cors({
   origin: function(origin, callback){
-    // allow requests with no origin 
-    // (like mobile apps or curl requests)
     if(!origin) return callback(null, true);
     if(allowedOrigins.indexOf(origin) === -1){
       var msg = 'The CORS policy for this site does not ' +
@@ -38,16 +37,6 @@ app.use(cors({
     return callback(null, true);
   }
 }));
-
-//app.use((req, res, next) => {
-//    res.header('Access-Control-Allow-Origin', '*');
-//    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-//    if (req.method === 'OPTIONS') {
-//        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-//        return res.status(200).json({});
-//    }
-//    next();
-//});
 
 app.listen(port,()=> {
 	console.log('Listening on: ' + port)
