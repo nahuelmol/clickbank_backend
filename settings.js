@@ -1,5 +1,8 @@
 
-const ImportLocalModule = (module) => {
+const ImportLocalModule = (mymodule) => {
+
+	console.log(module);
+
 	var modules = [
 		'./config',
 		'./db',
@@ -13,8 +16,10 @@ const ImportLocalModule = (module) => {
 			console.log(modules[i] + " module does not exists");
 		}
 	}
-	console.log(module);
 
+	var path = './' + mymodule;
+	console.log(mymodule);
+	return require(path);
 }
 
 module.exports = ImportLocalModule;

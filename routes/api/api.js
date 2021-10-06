@@ -2,11 +2,17 @@ const express 	= require('express');
 const jwt 		= require('jsonwebtoken');
 const router 	= express.Router();
 
+require('dotenv').config();
+const Import = require(process.env.SETTINGS);
+
+console.log('api: ');
+console.log(module.id);
+
 const {
 	BookModel,
 	UserModel,
 	CommentModel
-} = require('../../db/models');
+} = Import('db/models');
 
 const DescriptionViewList = (req,res) => {
 
