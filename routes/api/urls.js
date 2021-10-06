@@ -7,12 +7,14 @@ const {
 	RegisterView,
 	DescriptionViewRetrieve,
 	DescriptionViewList,
-	BookRegisterView
+	BookRegisterView,
+	UserViewRetrieve,
 } = require('./api');
 
 routes.get('/logout',	LogoutView);
 routes.post('/login',	LoginView);
 routes.post('/register',	RegisterView);
+routes.get('/profile',		UserViewRetrieve);
 
 routes.get('/description/:id', 	DescriptionViewRetrieve);
 routes.get('/description', 		DescriptionViewList);

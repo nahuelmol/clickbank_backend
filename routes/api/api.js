@@ -2,14 +2,11 @@ const express 	= require('express');
 const jwt 		= require('jsonwebtoken');
 const router 	= express.Router();
 
-
 const {
 	BookModel,
 	UserModel,
 	CommentModel
 } = require('../../db/models');
-
-
 
 const DescriptionViewList = (req,res) => {
 
@@ -21,7 +18,7 @@ const DescriptionViewList = (req,res) => {
 	}
 
 	res.json({'data':'example'});
-};
+}
 
 const DescriptionViewRetrieve = (req,res) => {
 	var access_token = req.headers.cookie;
@@ -85,9 +82,6 @@ const LoginView = async (req,res) => {
 		res.redirect(referer + "homepage");
 
 	})
-	
-
-
 }
 
 const RegisterView =  (req,res) => {
@@ -151,11 +145,19 @@ const BookRegisterView = (req,res) => {
 	res.redirect('back');
 }
 
+const UserViewRetrieve = (req,res) => {
+	const referer 	   = req.headers.referer;
+	const access_token = req.headers.cookie;
+
+	res.redirect(referer + '/profile');
+}
+
 module.exports = {
 	LogoutView,
 	LoginView,
 	RegisterView,
 	DescriptionViewRetrieve,
 	DescriptionViewList,
-	BookRegisterView
+	BookRegisterView,
+	UserViewRetrieve,
 }
