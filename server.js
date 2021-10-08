@@ -1,6 +1,6 @@
 const express 		  = require('express');
 const bodyParser 	  = require('body-parser');
-const cors 			    = require('cors');
+const cors 			  = require('cors');
 const cookieParser  = require('cookie-parser');
 const morgan        = require('morgan');
 
@@ -32,4 +32,7 @@ app.use(cors({
   }
 }));
 
-module.exports = app;
+if(module.parent.id == '.'){
+	module.exports = app;
+	}
+

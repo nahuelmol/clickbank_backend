@@ -1,12 +1,8 @@
 const express 	= require('express');
 const jwt 		= require('jsonwebtoken');
+const { Import }= require('absolute');
+
 const router 	= express.Router();
-
-require('dotenv').config();
-const Import = require(process.env.SETTINGS);
-
-console.log('api: ');
-console.log(module.id);
 
 const {
 	BookModel,

@@ -1,5 +1,7 @@
 
+
 const HomePageView = (req,res) => {
+
 	const user_token = req.headers.cookie;
 
 	if(!user_token){
@@ -33,3 +35,4 @@ module.exports = {
 	HomePageView: HomePageView,
 	FeedView:FeedView
 }
+

@@ -1,8 +1,6 @@
 
 const ImportLocalModule = (mymodule) => {
 
-	console.log(module);
-
 	var modules = [
 		'./config',
 		'./db',
@@ -18,7 +16,6 @@ const ImportLocalModule = (mymodule) => {
 	}
 
 	var path = './' + mymodule;
-	console.log(mymodule);
 	return require(path);
 }
 

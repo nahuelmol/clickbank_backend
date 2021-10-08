@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "config":{
+    "root":"myroot"
+  },
   "scripts": {
     "start":"nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "root":"settings"
   },
   "keywords": [],
-  "author": "",
+  "author": "Silvio",
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.5",
@@ -18,6 +22,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.15",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.13",
+    "absolute":"file:../absolute"
   }
 }

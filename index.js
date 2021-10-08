@@ -1,4 +1,5 @@
-const app = require("./server.js");
+const app = require("./server");
+require('absolute').Import('config/trial');
 
 require('dotenv').config();
 require('./db/conn');

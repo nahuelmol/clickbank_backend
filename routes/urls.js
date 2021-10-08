@@ -1,8 +1,8 @@
 const { Router } 	= require('express');
 const routes 		= Router();
-const { HomePageView, FeedView } = require('./views');
+const views = require('./views');
 
-routes.get('/homepage', HomePageView);
-routes.get('/feed',  	FeedView);
+routes.get('/homepage', views.HomePageView);
+routes.get('/feed',  	views.FeedView);
 
 module.exports = routes;
