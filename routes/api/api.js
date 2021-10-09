@@ -5,6 +5,11 @@ const { Import }= require('absolute');
 const router 	= express.Router();
 
 const {
+	encrypt,
+	decrypt
+} = Import('routes/utils');
+
+const {
 	BookModel,
 	UserModel,
 	CommentModel
@@ -92,6 +97,7 @@ const RegisterView =  (req,res) => {
 	const access_token = req.headers.cookie;
 
 	var { pass, name, email } = req.body;
+	var password = encrypt(pass)	
 
 	if(access_token){
 		res.cookie('message','you are already logged in, please close your session and try again then',{maxAge: 10800})
@@ -108,7 +114,7 @@ const RegisterView =  (req,res) => {
 		);
 
 		const new_user = new UserModel({
-			password:pass,
+			password:password,
 			name:name,
 			email:email
 		})
