@@ -32,7 +32,7 @@ const UserView = (req,res) => {
 }
 
 module.exports = {
-	HomePageView: HomePageView,
-	FeedView:FeedView
+	HomePageView,
+	FeedView
 }
 
