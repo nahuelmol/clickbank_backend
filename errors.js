@@ -1,14 +1,43 @@
-Aconst httpStatusCodes = require('httpStatusCodes')
+const httpStatusCodes = require('httpStatusCodes')
 
 class BaseError extends Error {
-        constructor(name, statusCode, description){
-        }
+	constructor(name,statusCode, isOperational, description){
+		super(description)
+
+		Object.setPrototypeOf(this, new.target.prototype)
+
+		this.name = name;
+		this.statusCode = statusCode;
+		this.isOperational = isOperational;
+
+		Error.captureStackTrace(this)
+	}
 }
 
-class a404Error extends BaseError {
+class Api404Error extends BaseError {
+	constructor(
+		name,
+		statusCode = httpsStatusCodes.NOT_FOUND,
+		description = 'Not found',
+		isOperational = true)
+		{
+		super(name,statusCode,isOperational,description)
+	}
+}
 
+class Api500Error extends BaseError {
+	constructor(
+		name,
+		statusCode = httpsStatusCodes.INTERNAL_SERVER,
+		description = 'internal server',
+		isOperational = true)
+		{
+		super(name,statusCode,isOperational,description)
+	}
 }
 
 module.exports = {
-    a404Error
+    BaseError,
+    Api404Error,
+    Api500Error
 }
