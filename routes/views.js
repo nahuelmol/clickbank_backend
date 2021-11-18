@@ -1,4 +1,8 @@
+const { BookModel,
+	CommentSchema,
+	UserModel} = require('../db/models')
 
+const { Api404Error } = require('../errors')
 
 const HomePageView = (req,res) => {
 
@@ -17,6 +21,13 @@ const FeedView = (req,res) => {
 	if(!user_token){
 		res.end('Do you want be logged in this site?');
 	}
+
+        User.find({}, function(err, users) {
+           if(err){
+               throw new Api404Error('users not found')
+           }
+           res.send({users: users});
+        });
 
 	res.end('this is the feed page');
 }
