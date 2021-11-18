@@ -9,6 +9,7 @@ const HomePageView = (req,res) => {
 	const user_token = req.headers.cookie;
 
 	if(!user_token){
+                throw new Api404Error('token not found')
 		res.end('You need to be logged in');
 	}
 
@@ -19,6 +20,7 @@ const FeedView = (req,res) => {
 	const user_token = req.headers.cookie;
 
 	if(!user_token){
+                throw new Api404Error('token not found')
 		res.end('Do you want be logged in this site?');
 	}
 
@@ -36,6 +38,7 @@ const UserView = (req,res) => {
 	const user_token = req.headers.cookie;
 
 	if(!user_token){
+                throw new Api404Error('token not found')
 		res.end('Do you want be logged in this site?');
 	}
 
