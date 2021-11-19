@@ -1,4 +1,4 @@
-const httpStatusCodes = require('httpStatusCodes')
+const httpStatusCodes = require('./httpStatusCodes')
 
 class BaseError extends Error {
 	constructor(name,statusCode, isOperational, description){
@@ -17,7 +17,7 @@ class BaseError extends Error {
 class Api404Error extends BaseError {
 	constructor(
 		name,
-		statusCode = httpsStatusCodes.NOT_FOUND,
+		statusCode = httpStatusCodes.NOT_FOUND,
 		description = 'Not found',
 		isOperational = true)
 		{
@@ -28,7 +28,7 @@ class Api404Error extends BaseError {
 class Api500Error extends BaseError {
 	constructor(
 		name,
-		statusCode = httpsStatusCodes.INTERNAL_SERVER,
+		statusCode = httpStatusCodes.INTERNAL_SERVER,
 		description = 'internal server',
 		isOperational = true)
 		{
