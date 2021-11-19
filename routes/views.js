@@ -8,8 +8,13 @@ const HomePageView = (req,res) => {
 
 	const user_token = req.headers.cookie;
 
-	if(!user_token){
-                throw new Api404Error('token not found')
+	try{
+		if(!user_token){
+			throw new Api404Error('token not found')
+		}
+	}catch(err){
+		console.log(err.name)
+		res.json({'msg':err.name})
 		res.end('You need to be logged in');
 	}
 
@@ -19,17 +24,23 @@ const HomePageView = (req,res) => {
 const FeedView = (req,res) => {
 	const user_token = req.headers.cookie;
 
-	if(!user_token){
-                throw new Api404Error('token not found')
-		res.end('Do you want be logged in this site?');
+	try{
+		if(!user_token){
+			throw new Api404Error('token not found')
+			res.end('Do you want be logged in this site?');
+		}
+	
+		User.find({}, function(err, users) {
+			if(err){
+	   	   		throw new Api404Error('users not found')
+	   		}
+	   		res.send({users: users});
+		});
+	}catch(err){
+		res.json({'msg':err.name})
+		res.end()
 	}
-
-        User.find({}, function(err, users) {
-           if(err){
-               throw new Api404Error('users not found')
-           }
-           res.send({users: users});
-        });
+	
 
 	res.end('this is the feed page');
 }

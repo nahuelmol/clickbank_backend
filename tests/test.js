@@ -8,11 +8,11 @@ const { BaseError,
 
 describe("Entering at testing...", () => {
 	before(() => {
-		console.log('once before all')
+		console.log('starting')
 	})
 
 	after(() => {
-		console.log('once after all')
+		console.log('ending')
 	})
 
 	describe( "error handling", () => {

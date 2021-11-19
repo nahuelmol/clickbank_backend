@@ -34,5 +34,7 @@ app.use(cors({
 
 if(module.parent.id == '.'){
 	module.exports = app;
-	}
+}else{
+  module.exports = app;
+}
 

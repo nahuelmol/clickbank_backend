@@ -20,7 +20,9 @@ const DescriptionViewList = (req,res) => {
 	var referer 	 = req.headers.referer;
 
 	if(!access_token){
-		res.redirect(referer);
+		res.json({'msg':'Here is not access token'})
+		res.redirect(referer)
+		res.end()
 	}
 
 	res.json({'data':'example'});
