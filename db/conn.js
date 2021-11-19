@@ -1,5 +1,5 @@
 const mongoose 	= require('mongoose');
-const configs	= require('absolute').Import('config/configs');
+const configs	= require('../config/configs');
 
 var DB_HOST = 'localhost'
 var DB_PORT = '27017'
@@ -10,7 +10,7 @@ var main = () =>{
 		BookModel, 
 		CommentModel, 
 		UserModel
- 	}	= require('absolute').Import('db/models');
+ 	}	= require('./models');
 
 	const db_config = configs.db_config;
 

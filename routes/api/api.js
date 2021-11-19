@@ -1,19 +1,18 @@
 const express 	= require('express');
 const jwt 		= require('jsonwebtoken');
-const { Import }= require('absolute');
 
 const router 	= express.Router();
 
 const {
 	encrypt,
 	decrypt
-} = Import('routes/utils');
+} = require('../utils');
 
 const {
 	BookModel,
 	UserModel,
 	CommentModel
-} = Import('db/models');
+} = require('../../db/models');
 
 const DescriptionViewList = (req,res) => {
 

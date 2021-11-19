@@ -1,5 +1,4 @@
 const app = require("./server");
-require('absolute').Import('config/trial');
 
 require('dotenv').config();
 require('./db/conn');
@@ -10,6 +9,10 @@ const redhost   = process.env.RED_HOST;
 
 const port 		= PORT || 8000
 
-app.listen(port,()=> {
-	console.log('Listening on: ' + port)
-})
+
+if(module.parent == null){
+	app.listen(port,()=> {
+		console.log('Listening on: ' + port)
+	})
+}
+	

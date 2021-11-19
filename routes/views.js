@@ -1,5 +1,3 @@
-
-
 const HomePageView = (req,res) => {
 
 	const user_token = req.headers.cookie;
@@ -28,7 +26,7 @@ const UserView = (req,res) => {
 		res.end('Do you want be logged in this site?');
 	}
 
-	res.end('this is the userview page');
+	res.end('Here should be the userview page');
 }
 
 module.exports = {
