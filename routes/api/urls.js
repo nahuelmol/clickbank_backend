@@ -14,7 +14,7 @@ const {
 routes.get('/logout',	LogoutView);
 routes.post('/login',	LoginView);
 routes.post('/register',	RegisterView);
-routes.get('/profile',		UserViewRetrieve);
+routes.get('/profile/:id',		UserViewRetrieve);
 
 routes.get('/description/:id', 	DescriptionViewRetrieve);
 routes.get('/description', 		DescriptionViewList);

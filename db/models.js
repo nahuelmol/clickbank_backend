@@ -2,6 +2,7 @@ const mongoose 	= require('mongoose');
 const Schema	= mongoose.Schema;
 
 var BookSchema	= new Schema({
+	id:Number,
 	title:String,
 	author:String,
 	gender:String,
@@ -14,6 +15,7 @@ var BookSchema	= new Schema({
 })
 
 var CommentSchema = new Schema({
+	id:Number,
 	author:String,
 	date:String,
 	likes:Number,
@@ -22,6 +24,7 @@ var CommentSchema = new Schema({
 })
 
 var UserSchema = new Schema({
+	id:Number,
 	name:String,
 	last_name:String,
 	password:String,

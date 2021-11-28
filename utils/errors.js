@@ -14,6 +14,23 @@ class BaseError extends Error {
 	}
 }
 
+class DbErrors extends Error {
+	constructor(name,description,isOperational){
+		this.name = name;
+		this.description = description;
+		this.isOperational = isOperational;
+	}
+}
+
+class NotExistsError extends DbErrors {
+	constructor(name,
+		description = 'not exists this register',
+		isOperational = false)
+		{
+		super(name,description,isOperational)
+	}
+}
+
 class Api404Error extends BaseError {
 	constructor(
 		name,
@@ -39,5 +56,6 @@ class Api500Error extends BaseError {
 module.exports = {
     BaseError,
     Api404Error,
-    Api500Error
+    Api500Error,
+    NotExistsError
 }

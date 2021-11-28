@@ -1,6 +1,10 @@
 const express 	= require('express');
 const jwt 		= require('jsonwebtoken');
 
+const {
+	NotExistsError
+} = require('../../utils/errors')
+
 const router 	= express.Router();
 
 const {
@@ -155,10 +159,34 @@ const BookRegisterView = (req,res) => {
 }
 
 const UserViewRetrieve = (req,res) => {
+	const user_id 	   = req.params.id 
 	const referer 	   = req.headers.referer;
 	const access_token = req.headers.cookie;
 
-	res.redirect(referer + '/profile');
+	const onData = (err, res) => {
+		try{
+			if(err){
+				throw new NotExistsError('requiering data')
+			}
+		}catch(err){
+			console.log(err.name)
+			res.json({'data':'data'})
+			res.end()
+		}
+	}
+
+	try {
+		if(!access_token){
+			throw new Api404Error('token not found')
+		}else{
+			UserModel.find({'id':user_id}, onData)
+		}
+	}catch(err){
+		res.json({'msg':err.name})
+		res.redirect(referer + '/profile');
+		res.end()
+	}
+
 }
 
 module.exports = {
