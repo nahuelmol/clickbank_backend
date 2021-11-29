@@ -2,8 +2,13 @@ const express 	= require('express');
 const jwt 		= require('jsonwebtoken');
 
 const {
-	NotExistsError
+	NotExistsError,
+	Api404Error
 } = require('../../utils/errors')
+
+const {
+	onData
+} = require('./aux_calls')
 
 const router 	= express.Router();
 
@@ -35,10 +40,20 @@ const DescriptionViewList = (req,res) => {
 const DescriptionViewRetrieve = (req,res) => {
 	var access_token = req.headers.cookie;
 	var referer 	 = req.headers.referer;
+	var desc_id 	 = req.params.id
 
-	if(!access_token){
-		res.redirect(referer);
+	try{
+		if(!access_token){
+			res.redirect(referer);
+			throw new Api404Error('token not found')
+		}else{
+			BookModel.find({'id':desc_id}, onData)
+		}
+	}catch(err){
+		console.log(err.name)
+		res.end()
 	}
+	
 	
 	const {id}		= req.params;
 	res.json({'data':'example'});
@@ -162,18 +177,6 @@ const UserViewRetrieve = (req,res) => {
 	const user_id 	   = req.params.id 
 	const referer 	   = req.headers.referer;
 	const access_token = req.headers.cookie;
-
-	const onData = (err, res) => {
-		try{
-			if(err){
-				throw new NotExistsError('requiering data')
-			}
-		}catch(err){
-			console.log(err.name)
-			res.json({'data':'data'})
-			res.end()
-		}
-	}
 
 	try {
 		if(!access_token){

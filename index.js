@@ -7,12 +7,10 @@ const PORT      = process.env.PORT;
 const localhost = process.env.LOCAL_HOST;
 const redhost   = process.env.RED_HOST;
 
-const port 		= PORT || 8000
 
+app.set('port', PORT || 8000)
 
 if(module.parent == null){
-	app.listen(port,()=> {
-		console.log('Listening on: ' + port)
-	})
+	app.listen(app.get('port'), _ => console.log(`Listening on: ${localhost}:${app.get('port')}`))
 }
 	
